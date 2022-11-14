@@ -1,6 +1,5 @@
 import os
 import openai
-import config
 import argparse
 import re
 
@@ -21,7 +20,7 @@ def validate_length(prompt:str)->bool:
     return len(prompt)<=MAX_INPUT_LENGTH
 
 def generate_branding_snippet(subject:str):
-    openai.api_key = config.OPENAI_API_KEY
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     prompt = f'Generate Upbeat branding snippet for {subject}'
 
     response = openai.Completion.create(model="davinci-instruct-beta-v3", prompt=prompt,max_tokens=32)
@@ -32,7 +31,7 @@ def generate_branding_snippet(subject:str):
     return branding_text
 
 def generate_branding_keywords(subject:str):
-    openai.api_key = config.OPENAI_API_KEY
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     prompt = f'Generate related branding keywords for {subject}'
 
     response = openai.Completion.create(model="davinci-instruct-beta-v3", prompt=prompt,max_tokens=32)
