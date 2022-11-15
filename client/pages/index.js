@@ -12,7 +12,7 @@ export default function Home() {
         <meta name="description" content="Generate marketing snippet for your product" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Image src={Logo} className="w-20 h-20 animate-spin-slow" />
+      <Image src={Logo} className="w-20 h-20 animate-spin-slow" alt="logo"/>
       <Snippet/ >
 
     </div>
