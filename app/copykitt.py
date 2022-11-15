@@ -21,9 +21,11 @@ def validate_length(prompt:str)->bool:
 
 def generate_branding_snippet(subject:str):
     openai.api_key = os.getenv("OPENAI_API_KEY")
-    prompt = f'Generate Upbeat branding snippet for {subject}'
+    prompt = f"Write a creative ad for {subject} to run on FaceBook"
 
-    response = openai.Completion.create(model="davinci-instruct-beta-v3", prompt=prompt,max_tokens=32)
+    response = openai.Completion.create(model="davinci-instruct-beta-v3",prompt=prompt,temperature=0.5,max_tokens=60,top_p=1.0,frequency_penalty=0.0,presence_penalty=0.0)
+
+
     branding_text = response['choices'][0]['text'].strip()
     if branding_text[-1].isalpha():
         branding_text+='...'
@@ -32,6 +34,7 @@ def generate_branding_snippet(subject:str):
 
 def generate_branding_keywords(subject:str):
     openai.api_key = os.getenv("OPENAI_API_KEY")
+    
     prompt = f'Generate related branding keywords for {subject}'
 
     response = openai.Completion.create(model="davinci-instruct-beta-v3", prompt=prompt,max_tokens=32)

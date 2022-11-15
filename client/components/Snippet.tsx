@@ -7,10 +7,11 @@ function Snippet() {
   const [snippet, setSnippet] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [results, setResults] = useState(false);
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const MAX_CHAR = 32;
   const handleSubmit = (prompt: string) => {
-    setIsLoading(true)
+    if (!prompt.length) return;
+    setIsLoading(true);
     fetch(
       `https://visqe28jta.execute-api.ap-south-1.amazonaws.com/prod/generate_snippet_and_keywords?prompt=${prompt}`
     )
@@ -20,16 +21,19 @@ function Snippet() {
         setSnippet(res.snippet);
         setResults(true);
       })
-      .catch(err=>alert(err))
-      .finally(()=>setIsLoading(false))
+      .catch((err) => alert(err))
+      .finally(() => setIsLoading(false));
   };
   const handleBack = () => {
     setPrompt("");
     setResults(false);
   };
+  // bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-pink-700 via-orange-300 to-fuchsia-300
   return (
-    <div>
-      <h1>Snippet-AI</h1>
+    <div className="w-[100%]">
+      <h1 className="font-extrabold p-2 text-transparent text-center text-4xl md:text-8xl bg-clip-text bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-gray-400 via-zinc-100 to-green-600 ">
+        Copy.ai
+      </h1>
       {!results ? (
         <UserInput
           handleSubmit={handleSubmit}
